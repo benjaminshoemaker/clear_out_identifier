@@ -1,0 +1,18 @@
+[
+  {
+    "pattern": "(magsafe|\\bpower\\s*adapter\\b|ac\\s*adapter|\\ba\\d{4}\\b)",
+    "category": "Electronics > Computers > Computer Accessories > Laptop Chargers & Adapters",
+    "brand": "Apple"
+  },
+  {
+    "pattern": "(isbn|\\b978-?\\d{10,}\\b)",
+    "category": "Media > Books",
+    "brand": null
+  },
+  {
+    "pattern": "(jacket|coat|parka|hoodie|\\brn\\d{5,})",
+    "category": "Apparel & Accessories > Clothing > Outerwear > Jackets",
+    "brand": null
+  }
+]
+

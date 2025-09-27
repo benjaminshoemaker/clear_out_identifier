@@ -1,0 +1,9 @@
+# user-local photos
+packages/identify/test/user_fixtures/*
+!packages/identify/test/user_fixtures/.keep
+!packages/identify/test/user_fixtures/user_manifest.example.json
+
+# debug artifacts
+debug/
+tmp/
+

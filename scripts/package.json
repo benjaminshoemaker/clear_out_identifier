@@ -1,0 +1,12 @@
+{
+  "name": "scripts",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "eval": "node eval.js"
+  },
+  "dependencies": {
+    "@clearout/identify": "workspace:*"
+  }
+}
+
