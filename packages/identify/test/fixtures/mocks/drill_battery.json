@@ -1,0 +1,8 @@
+{
+  "category": "tools",
+  "brand_guess": "DeWalt",
+  "model_guess": "DCD771C2",
+  "materials": ["metal", "plastic"],
+  "hazards": ["battery"]
+}
+

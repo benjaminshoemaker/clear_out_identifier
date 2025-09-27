@@ -1,0 +1,10 @@
+{
+  "samples": [
+    { "id": "book", "path": "packages/identify/test/fixtures/book_isbn_9780306406157.jpg", "gt": { "category": "books", "resolution": "sku", "hazards": [] } },
+    { "id": "skillet", "path": "packages/identify/test/fixtures/skillet_bottom_stamp.jpg", "gt": { "category": "kitchenware", "resolution": "brand_category", "hazards": [] } },
+    { "id": "jacket", "path": "packages/identify/test/fixtures/jacket_rn12345_levi.jpg", "gt": { "category": "clothing", "resolution": "brand_category", "hazards": [] } },
+    { "id": "drill_battery", "path": "packages/identify/test/fixtures/drill_battery.jpg", "gt": { "category": "tools", "resolution": "category_only", "hazards": ["battery"] } },
+    { "id": "mug", "path": "packages/identify/test/fixtures/mug.jpg", "gt": { "category": "ceramics", "resolution": "category_only", "hazards": [] } }
+  ]
+}
+

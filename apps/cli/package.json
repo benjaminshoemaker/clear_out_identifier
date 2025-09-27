@@ -1,0 +1,20 @@
+{
+  "name": "@clearout/cli",
+  "version": "0.1.0",
+  "type": "module",
+  "bin": {
+    "clearout-cli": "dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "@clearout/identify": "workspace:*",
+    "yargs": "^17.7.2"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.0"
+  }
+}
+
