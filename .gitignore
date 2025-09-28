@@ -7,3 +7,12 @@ packages/identify/test/user_fixtures/*
 debug/
 tmp/
 
+# ignore UI dependencies
+figma_files/node_modules/
+figma_files/.vite/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+.env.*.development

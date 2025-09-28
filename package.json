@@ -12,5 +12,10 @@
     "test": "pnpm -r --filter ./packages/identify... run test",
     "cli": "pnpm -r --filter ./packages/identify... run build && pnpm --filter @clearout/cli start",
     "eval": "pnpm --filter scripts run eval"
+  },
+  "dependencies": {
+    "fast-glob": "^3.3.2",
+    "openai": "^4.57.0",
+    "yargs": "^17.7.2"
   }
 }

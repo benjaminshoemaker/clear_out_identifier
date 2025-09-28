@@ -6,7 +6,9 @@
     "eval": "node eval.js"
   },
   "dependencies": {
-    "@clearout/identify": "workspace:*"
+    "@clearout/identify": "workspace:*",
+    "fast-glob": "^3.3.3",
+    "openai": "^4.104.0",
+    "yargs": "^17.7.2"
   }
 }
-

@@ -1,0 +1,5 @@
+item_id,model,brand,model_name,category,hazards,resolution_level,input_tokens,output_tokens,est_cost_usd
+item_01,gpt-4o-mini,Rolflex,,health_beauty,,brand_model,102408,59,0.0154
+item_02,gpt-4o-mini,AUKEY,,electronics,,brand_category,51406,73,0.0078
+item_03,gpt-4o-mini,Coolations,,arts_entertainment,blade,brand_model,51406,49,0.0077
+item_04,gpt-4o-mini,Apple,A1436,electronics,battery,brand_model,76907,65,0.0116
