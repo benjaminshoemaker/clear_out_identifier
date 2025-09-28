@@ -23,4 +23,4 @@ export type VlmJson = z.infer<typeof VlmJsonSchema>;
 export interface VisionAdapter {
     describe(images: any[], systemPrompt: string, userPrompt: string, opts?: Options): Promise<VlmJson>;
 }
-export declare const vision: VisionAdapter;
+export declare function getVisionAdapter(opts?: Options): VisionAdapter;

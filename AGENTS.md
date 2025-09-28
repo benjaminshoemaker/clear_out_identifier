@@ -1,39 +1,37 @@
-# AGENTS
+# Repository Guidelines
 
-This repo contains an offline identification pipeline (TypeScript library + CLI) and a separate OpenAI VLM evaluation script. Use these notes when making changes or running evaluations.
+## Project Structure & Module Organization
+- `packages/identify/` — Core TypeScript library (ESM). Source in `src/`, tests in `test/`, data in `data/`.
+- `apps/cli/` — Offline CLI wrapper for the library (ad‑hoc analyze, analyze‑user).
+- `scripts/` — Tooling and evaluation scripts (e.g., `vlm_cli.mjs`, `pricing.json`).
+- `dataset/` — Sample evaluation manifest; no PII or secrets.
+- `figma_files/` — UI export; do not modify as part of logic work.
 
-Scope and conventions
-- Keep the core library (`packages/identify`) fully offline by default. Heavy deps (OCR, barcode, ONNX) are dynamically imported and should fail gracefully.
-- Don’t change any UI/figma export in `figma_files/`. This repo is for logic and scripts only.
-- Tests in `packages/identify/test` are ESM/Jest and run offline.
-- Prefer small, targeted edits; match existing coding style (TypeScript strict, ESM).
+## Build, Test, and Development Commands
+- Build all: `pnpm build` (builds library then CLI)
+- Run tests (library): `pnpm test`
+- Offline analyze (images): `pnpm cli analyze <img...> --enableStages=barcode,ocr --verbose`
+- Offline analyze (manifest): `pnpm cli analyze-user --userDir packages/identify/test/user_fixtures --verbose`
+- OpenAI VLM eval: `node scripts/vlm_cli.mjs --model gpt-4o --printJson`
 
-Main CLIs
-- Offline CLI: `apps/cli` exposes:
-  - `analyze <images...>` — ad-hoc image analysis.
-  - `analyze-user` — evaluates a manifest of user fixtures.
-  - Verbose output separates Manifest vs Analysis; add `--verbose` and optionally `--pretty` for full JSON.
-- OpenAI VLM evaluation (separate script): `scripts/vlm_cli.mjs`
-  - Uses OpenAI Responses API with Structured Outputs (JSON Schema).
-  - Flags: `--model`, `--userDir`, `--manifest`, `--maxImagesPerItem`, `--outJson`, `--outCsv`, `--printJson`, `--dryRun`, `--images`.
-  - Concurrency=2; 60s/item timeout; single retry on parse failure.
-  - Logs token usage and estimates cost using `scripts/pricing.json` (no runtime scraping).
+## Coding Style & Naming Conventions
+- Language: TypeScript (Node 20+, ESM). Strict mode enabled.
+- Indentation: 2 spaces. Avoid trailing whitespace; keep lines concise.
+- Naming: `PascalCase` types/interfaces; `camelCase` functions/variables; filenames in `kebab-case.ts`.
+- Imports: extensionful ESM within the package (e.g., `./file.js`).
+- Keep changes minimal and focused; prefer small, composable functions.
 
-Environment & secrets
-- Place OpenAI credentials in `.env.local` at the repo root (or cwd):
-  - `OPENAI_API_KEY="sk-..."`
-- The VLM script will read `.env.local` and then `process.env`.
+## Testing Guidelines
+- Framework: Jest (ESM via ts‑jest). Tests live in `packages/identify/test` and end with `.spec.ts`.
+- Tests run offline; avoid network calls. Prefer deterministic inputs (buffers/fixtures).
+- Run: `pnpm test`. Add tests for new logic and edge cases; keep them fast.
 
-Pricing
-- Edit `scripts/pricing.json` to match https://platform.openai.com/docs/pricing.
-- The script computes cost from `usage.input_tokens` and `usage.output_tokens` using per‑1M (preferred) or per‑1K rates if provided.
+## Commit & Pull Request Guidelines
+- Commits: imperative mood and concise scope (e.g., `feat(cli): add verbose manifest section`). Group related changes.
+- PRs: include a clear description, steps to validate (commands), and relevant screenshots/console output. Link issues when applicable.
+- Ensure CI passes locally (`pnpm build`, `pnpm test`) before opening PRs.
 
-Wiring OpenAI into the main CLI
-- Default behavior remains offline. To enable OpenAI VLM inside the main CLI, wire a new `OpenAIVision` adapter in `packages/identify/src/detectors/vision.ts`, select it when `opts.vlmProvider === 'openai'`, and plumb `--provider=openai` from `apps/cli` commands (both `analyze` and `analyze-user`).
-- Optionally route outputs through `fusion.ts` if combining signals with barcode/OCR/CLIP.
-
-Gotchas
-- The Responses API expects `input_text` / `input_image` content items and Structured Outputs at top-level `text.format = { type: 'json_schema', name, schema, strict }`.
-- For images, send `image_url: "data:<mime>;base64,<b64>"`.
-- Do not fetch pricing at runtime; rely on `scripts/pricing.json`.
-
+## Security & Configuration Tips
+- Never commit secrets. `.env.local` is git‑ignored; keep `OPENAI_API_KEY` there. Provide `.env.local.example` if needed.
+- The VLM script reads pricing from `scripts/pricing.json` (edit to match the OpenAI pricing page). No runtime scraping.
+- Push protection may block commits with secrets—remove the file from commits and amend before pushing.

@@ -75,6 +75,7 @@ async function main() {
       'Analyze user fixtures from manifest',
       (y: any) => y
         .option('enableStages', { type: 'string', default: 'barcode,ocr' })
+        .option('provider', { type: 'string', default: 'mock' })
         .option('userDir', { type: 'string', default: 'packages/identify/test/user_fixtures' })
         .option('userManifest', { type: 'string', default: '' })
         .option('pretty', { type: 'boolean', default: false })
@@ -113,6 +114,7 @@ async function main() {
             timeoutMs: Number(args.timeoutMs) || 2000,
             enableStages,
             userAllowedCategories: allowedCategories,
+            vlmProvider: args.provider || 'mock',
           });
           const text = (res as any).evidence?.ocr?.join('\n') || '';
           const rule = classifyFromText(text, allowedCategories);

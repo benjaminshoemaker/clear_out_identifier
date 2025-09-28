@@ -1,41 +1,39 @@
 [
   {
     "item_id": "item_01",
-    "model": "gpt-4o-mini",
+    "model": "gpt-4o",
     "output": {
-      "brand": "Rolflex",
+      "brand": "ROLFLEX",
       "model": null,
       "category": "health_beauty",
       "hazards": [],
-      "resolution_level": "brand_model",
+      "resolution_level": "brand_category",
       "evidence": {
         "from_text": [
-          "Rolflex",
-          "Patent Pending",
-          "www.RolflexPro.com"
+          "ROLFLEX",
+          "www.Rolflexpro.com"
         ],
         "from_logo": [],
         "from_barcode": []
       }
     },
     "usage": {
-      "input_tokens": 102408,
+      "input_tokens": 3464,
       "input_tokens_details": {
         "cached_tokens": 0
       },
-      "output_tokens": 59,
+      "output_tokens": 56,
       "output_tokens_details": {
         "reasoning_tokens": 0
       },
-      "total_tokens": 102467
+      "total_tokens": 3520
     },
-    "est_cost": "0.0154",
+    "est_cost": "0.0092",
     "extra": {
       "evidence": {
         "from_text": [
-          "Rolflex",
-          "Patent Pending",
-          "www.RolflexPro.com"
+          "ROLFLEX",
+          "www.Rolflexpro.com"
         ],
         "from_logo": [],
         "from_barcode": []
@@ -44,12 +42,14 @@
   },
   {
     "item_id": "item_02",
-    "model": "gpt-4o-mini",
+    "model": "gpt-4o",
     "output": {
-      "brand": "AUKEY",
+      "brand": "Aukey",
       "model": null,
       "category": "electronics",
-      "hazards": [],
+      "hazards": [
+        "battery"
+      ],
       "resolution_level": "brand_category",
       "evidence": {
         "from_text": [
@@ -63,17 +63,17 @@
       }
     },
     "usage": {
-      "input_tokens": 51406,
+      "input_tokens": 1934,
       "input_tokens_details": {
         "cached_tokens": 0
       },
-      "output_tokens": 73,
+      "output_tokens": 76,
       "output_tokens_details": {
         "reasoning_tokens": 0
       },
-      "total_tokens": 51479
+      "total_tokens": 2010
     },
-    "est_cost": "0.0078",
+    "est_cost": "0.0056",
     "extra": {
       "evidence": {
         "from_text": [
@@ -89,25 +89,25 @@
   },
   {
     "item_id": "item_03",
-    "model": "gpt-4o-mini",
+    "model": "gpt-4o",
     "output": {
-      "brand": "Coolations",
+      "brand": "Colorations",
       "model": null,
       "category": "arts_entertainment",
       "hazards": [
         "blade"
       ],
-      "resolution_level": "brand_model",
+      "resolution_level": "brand_category",
       "evidence": {
         "from_text": [
-          "Coolations"
+          "Colorations"
         ],
         "from_logo": [],
         "from_barcode": []
       }
     },
     "usage": {
-      "input_tokens": 51406,
+      "input_tokens": 1934,
       "input_tokens_details": {
         "cached_tokens": 0
       },
@@ -115,13 +115,13 @@
       "output_tokens_details": {
         "reasoning_tokens": 0
       },
-      "total_tokens": 51455
+      "total_tokens": 1983
     },
-    "est_cost": "0.0077",
+    "est_cost": "0.0053",
     "extra": {
       "evidence": {
         "from_text": [
-          "Coolations"
+          "Colorations"
         ],
         "from_logo": [],
         "from_barcode": []
@@ -130,7 +130,7 @@
   },
   {
     "item_id": "item_04",
-    "model": "gpt-4o-mini",
+    "model": "gpt-4o",
     "output": {
       "brand": "Apple",
       "model": "A1436",
@@ -141,9 +141,7 @@
       "resolution_level": "brand_model",
       "evidence": {
         "from_text": [
-          "45W",
-          "MagSafe 2 Power Adapter",
-          "Designed by Apple in California",
+          "45W MagSafe 2 Power Adapter",
           "Model A1436"
         ],
         "from_logo": [],
@@ -151,23 +149,21 @@
       }
     },
     "usage": {
-      "input_tokens": 76907,
+      "input_tokens": 2699,
       "input_tokens_details": {
         "cached_tokens": 0
       },
-      "output_tokens": 65,
+      "output_tokens": 58,
       "output_tokens_details": {
         "reasoning_tokens": 0
       },
-      "total_tokens": 76972
+      "total_tokens": 2757
     },
-    "est_cost": "0.0116",
+    "est_cost": "0.0073",
     "extra": {
       "evidence": {
         "from_text": [
-          "45W",
-          "MagSafe 2 Power Adapter",
-          "Designed by Apple in California",
+          "45W MagSafe 2 Power Adapter",
           "Model A1436"
         ],
         "from_logo": [],
