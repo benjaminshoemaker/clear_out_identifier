@@ -1,7 +1,7 @@
 import { preprocessImages } from './util/img.js';
 import { detectBarcodes, mapBarcodeToCategory } from './detectors/barcode.js';
 import { runOcr } from './detectors/ocr.js';
-import { vision } from './detectors/vision.js';
+import { getVisionAdapter } from './detectors/vision.js';
 import { clipNeighbors } from './detectors/clip.js';
 import { fuse } from './fusion.js';
 import { IdentifyResult, Options, OptionsSchema } from './schemas.js';
@@ -19,7 +19,7 @@ export async function analyzeItem(images: any[], opts?: Options): Promise<Identi
 
   const barcodeP = doStage('barcode') ? detectBarcodes(pre.map(p => p.original), options) : Promise.resolve({ codes: [] });
   const ocrP = doStage('ocr') ? runOcr(pre.map(p => p.ocrGray), options) : Promise.resolve({ lines: [], ids: [], hazards: [], brandHints: [] });
-  const vlmP = doStage('vlm') ? vision.describe(pre.map(p => p.original), SYSTEM_PROMPT, 'Describe item', options) : Promise.resolve({});
+  const vlmP = doStage('vlm') ? getVisionAdapter(options).describe(pre.map(p => p.original), SYSTEM_PROMPT, 'Describe item', options) : Promise.resolve({});
   const clipP = doStage('clip') ? clipNeighbors(pre.map(p => p.original), options) : Promise.resolve({ neighbors: [] });
 
   const [barcode, ocr, vlm, clip] = await Promise.all([barcodeP, ocrP, vlmP, clipP]);
@@ -52,10 +52,15 @@ export async function analyzeItem(images: any[], opts?: Options): Promise<Identi
     if (category.includes('Books') || category.includes('Adapters') || category.includes('Jackets') || category.includes('Outerwear') || category.includes('Clothing')) next = 'sell';
   }
 
+  // Merge VLM hints into baseline where available
+  const vlmBrand = (vlm as any)?.brand_guess as string | undefined;
+  const vlmModel = (vlm as any)?.model_guess as string | undefined;
+  const vlmHaz = Array.isArray((vlm as any)?.hazards) ? (vlm as any).hazards as string[] : [];
+
   const result: IdentifyResult = {
     resolution_level: resolution,
-    attributes: { brand, model: model || undefined },
-    hazards: [],
+    attributes: { brand: brand || vlmBrand, model: model || vlmModel || undefined },
+    hazards: vlmHaz as any,
     confidence,
     evidence: { codes: barcode.codes, ocr: ocr.lines || [], logos: [], neighbors: [] },
     next_step: next,

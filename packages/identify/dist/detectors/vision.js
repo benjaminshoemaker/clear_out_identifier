@@ -23,5 +23,83 @@ class MockVision {
         }
     }
 }
-export const vision = new MockVision();
+class OpenAIVision {
+    constructor(model) { this.model = model || 'gpt-4o'; }
+    async describe(images, systemPrompt, userPrompt, opts) {
+        const key = process.env.OPENAI_API_KEY;
+        if (!key)
+            return {};
+        const imgParts = images.map((buf) => {
+            try {
+                const b64 = Buffer.isBuffer(buf) ? buf.toString('base64') : Buffer.from(buf).toString('base64');
+                const url = `data:image/png;base64,${b64}`;
+                return { type: 'input_image', image_url: url };
+            }
+            catch {
+                return null;
+            }
+        }).filter(Boolean);
+        const schema = {
+            type: 'json_schema',
+            name: 'ClearOutVisionSchema',
+            strict: true,
+            schema: {
+                type: 'object',
+                additionalProperties: false,
+                properties: {
+                    brand_guess: { type: 'string' },
+                    model_guess: { type: ['string', 'null'] },
+                    category: { type: 'string' },
+                    hazards: { type: 'array', items: { type: 'string' } },
+                },
+                required: ['brand_guess', 'model_guess', 'category', 'hazards']
+            }
+        };
+        const payload = {
+            model: this.model,
+            temperature: 0,
+            input: [
+                { role: 'system', content: [{ type: 'input_text', text: systemPrompt }] },
+                { role: 'user', content: [{ type: 'input_text', text: userPrompt }, ...imgParts] },
+            ],
+            text: { format: schema }
+        };
+        const controller = new AbortController();
+        const t = setTimeout(() => controller.abort(), (opts?.timeoutMs ?? 800));
+        try {
+            const res = await fetch('https://api.openai.com/v1/responses', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${key}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload),
+                signal: controller.signal,
+            });
+            if (!res.ok)
+                return {};
+            const json = await res.json();
+            const text = json.output_text || (json.output?.[0]?.content?.[0]?.text?.value ?? '');
+            if (!text)
+                return {};
+            try {
+                return VlmJsonSchema.parse(JSON.parse(text));
+            }
+            catch {
+                return {};
+            }
+        }
+        catch {
+            return {};
+        }
+        finally {
+            clearTimeout(t);
+        }
+    }
+}
+export function getVisionAdapter(opts) {
+    if (opts?.vlmProvider === 'openai')
+        return new OpenAIVision();
+    return new MockVision();
+}
 //# sourceMappingURL=vision.js.map
