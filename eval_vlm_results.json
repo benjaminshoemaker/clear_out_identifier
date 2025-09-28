@@ -1,0 +1,178 @@
+[
+  {
+    "item_id": "item_01",
+    "model": "gpt-4o-mini",
+    "output": {
+      "brand": "Rolflex",
+      "model": null,
+      "category": "health_beauty",
+      "hazards": [],
+      "resolution_level": "brand_model",
+      "evidence": {
+        "from_text": [
+          "Rolflex",
+          "Patent Pending",
+          "www.RolflexPro.com"
+        ],
+        "from_logo": [],
+        "from_barcode": []
+      }
+    },
+    "usage": {
+      "input_tokens": 102408,
+      "input_tokens_details": {
+        "cached_tokens": 0
+      },
+      "output_tokens": 59,
+      "output_tokens_details": {
+        "reasoning_tokens": 0
+      },
+      "total_tokens": 102467
+    },
+    "est_cost": "0.0154",
+    "extra": {
+      "evidence": {
+        "from_text": [
+          "Rolflex",
+          "Patent Pending",
+          "www.RolflexPro.com"
+        ],
+        "from_logo": [],
+        "from_barcode": []
+      }
+    }
+  },
+  {
+    "item_id": "item_02",
+    "model": "gpt-4o-mini",
+    "output": {
+      "brand": "AUKEY",
+      "model": null,
+      "category": "electronics",
+      "hazards": [],
+      "resolution_level": "brand_category",
+      "evidence": {
+        "from_text": [
+          "AUKEY",
+          "OUTPUT: DC 4*2.4A/5V",
+          "INPUT: DC 12-24V",
+          "MVPower CC-01"
+        ],
+        "from_logo": [],
+        "from_barcode": []
+      }
+    },
+    "usage": {
+      "input_tokens": 51406,
+      "input_tokens_details": {
+        "cached_tokens": 0
+      },
+      "output_tokens": 73,
+      "output_tokens_details": {
+        "reasoning_tokens": 0
+      },
+      "total_tokens": 51479
+    },
+    "est_cost": "0.0078",
+    "extra": {
+      "evidence": {
+        "from_text": [
+          "AUKEY",
+          "OUTPUT: DC 4*2.4A/5V",
+          "INPUT: DC 12-24V",
+          "MVPower CC-01"
+        ],
+        "from_logo": [],
+        "from_barcode": []
+      }
+    }
+  },
+  {
+    "item_id": "item_03",
+    "model": "gpt-4o-mini",
+    "output": {
+      "brand": "Coolations",
+      "model": null,
+      "category": "arts_entertainment",
+      "hazards": [
+        "blade"
+      ],
+      "resolution_level": "brand_model",
+      "evidence": {
+        "from_text": [
+          "Coolations"
+        ],
+        "from_logo": [],
+        "from_barcode": []
+      }
+    },
+    "usage": {
+      "input_tokens": 51406,
+      "input_tokens_details": {
+        "cached_tokens": 0
+      },
+      "output_tokens": 49,
+      "output_tokens_details": {
+        "reasoning_tokens": 0
+      },
+      "total_tokens": 51455
+    },
+    "est_cost": "0.0077",
+    "extra": {
+      "evidence": {
+        "from_text": [
+          "Coolations"
+        ],
+        "from_logo": [],
+        "from_barcode": []
+      }
+    }
+  },
+  {
+    "item_id": "item_04",
+    "model": "gpt-4o-mini",
+    "output": {
+      "brand": "Apple",
+      "model": "A1436",
+      "category": "electronics",
+      "hazards": [
+        "battery"
+      ],
+      "resolution_level": "brand_model",
+      "evidence": {
+        "from_text": [
+          "45W",
+          "MagSafe 2 Power Adapter",
+          "Designed by Apple in California",
+          "Model A1436"
+        ],
+        "from_logo": [],
+        "from_barcode": []
+      }
+    },
+    "usage": {
+      "input_tokens": 76907,
+      "input_tokens_details": {
+        "cached_tokens": 0
+      },
+      "output_tokens": 65,
+      "output_tokens_details": {
+        "reasoning_tokens": 0
+      },
+      "total_tokens": 76972
+    },
+    "est_cost": "0.0116",
+    "extra": {
+      "evidence": {
+        "from_text": [
+          "45W",
+          "MagSafe 2 Power Adapter",
+          "Designed by Apple in California",
+          "Model A1436"
+        ],
+        "from_logo": [],
+        "from_barcode": []
+      }
+    }
+  }
+]

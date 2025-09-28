@@ -1,0 +1,70 @@
+[
+  {
+    "id": "item_01",
+    "predCat": null,
+    "gtCat": "health_beauty",
+    "brand": null,
+    "brandOK": false,
+    "model": null,
+    "modelOK": null,
+    "resolution": "category_only",
+    "resOK": false,
+    "haz": [],
+    "hazGT": [],
+    "hazP": null,
+    "hazR": null,
+    "confidence": 0.3
+  },
+  {
+    "id": "item_02",
+    "predCat": null,
+    "gtCat": "vehicles_parts",
+    "brand": null,
+    "brandOK": false,
+    "model": null,
+    "modelOK": false,
+    "resolution": "category_only",
+    "resOK": false,
+    "haz": [],
+    "hazGT": [],
+    "hazP": null,
+    "hazR": null,
+    "confidence": 0.3
+  },
+  {
+    "id": "item_03",
+    "predCat": null,
+    "gtCat": "arts_entertainment",
+    "brand": null,
+    "brandOK": false,
+    "model": null,
+    "modelOK": null,
+    "resolution": "category_only",
+    "resOK": false,
+    "haz": [],
+    "hazGT": [
+      "blade"
+    ],
+    "hazP": null,
+    "hazR": 0,
+    "confidence": 0.3
+  },
+  {
+    "id": "item_04",
+    "predCat": null,
+    "gtCat": "electronics",
+    "brand": null,
+    "brandOK": false,
+    "model": null,
+    "modelOK": false,
+    "resolution": "category_only",
+    "resOK": false,
+    "haz": [],
+    "hazGT": [
+      "battery"
+    ],
+    "hazP": null,
+    "hazR": 0,
+    "confidence": 0.3
+  }
+]

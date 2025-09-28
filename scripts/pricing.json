@@ -1,0 +1,7 @@
+{
+  "gpt-5": { "input_per_1m": 1.25, "output_per_1m": 10 },
+  "gpt-5-mini": { "input_per_1m": 0.25, "output_per_1m": 2 },
+  "gpt-4o": { "input_per_1m": 2.50, "output_per_1m": 10.00 },
+  "gpt-4.1": { "input_per_1m": 2, "output_per_1m": 8 },
+  "gpt-4o-mini": { "input_per_1m": 0.15, "output_per_1m": 0.6 }
+}
