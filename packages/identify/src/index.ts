@@ -73,4 +73,4 @@ export async function analyzeItem(images: any[], opts?: Options): Promise<Identi
   return result;
 }
 
-export type { IdentifyResult } from './schemas.js';
+export type { IdentifyResult, Options } from './schemas.js';
