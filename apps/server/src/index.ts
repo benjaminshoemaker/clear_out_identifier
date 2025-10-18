@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
 import multer from 'multer';
@@ -8,6 +9,7 @@ import { mapBarcodeToCategory } from '@clearout/identify/dist/detectors/barcode.
 const app = express();
 app.use(cors());
 const upload = multer({ storage: multer.memoryStorage(), limits: { files: 6, fileSize: 10 * 1024 * 1024 } });
+const DEBUG = (process.env.CLEAROUT_DEBUG === '1' || process.env.NODE_ENV === 'development');
 
 app.get('/health', (_req, res) => res.json({ ok: true }));
 
@@ -23,6 +25,13 @@ app.post('/api/identify', upload.array('images', 6), async (req, res) => {
     const provider = String(req.query.provider ?? 'mock');
     const allowFilenameText = String(req.query.allowFilenameText ?? 'true') === 'true';
     const timeoutMs = Number(req.query.timeoutMs ?? 2000) || 2000;
+
+    if (DEBUG) {
+      console.log(`[identify] files=${files.length} enableStages=${enableStagesParam} provider=${provider} allowFilenameText=${allowFilenameText} timeoutMs=${timeoutMs}`);
+      if (provider === 'openai') {
+        console.log(`[identify] VLM requested: ${process.env.OPENAI_API_KEY ? 'OPENAI_API_KEY present' : 'OPENAI_API_KEY MISSING'}`);
+      }
+    }
 
     const bufs = files.map(f => f.buffer);
     const result = await analyzeItem(bufs, {
@@ -50,6 +59,11 @@ app.post('/api/identify', upload.array('images', 6), async (req, res) => {
       },
     };
 
+    if (DEBUG) {
+      const ev = (result as any)?.evidence || {};
+      console.log(`[identify] resolution=${out.resolution_level} conf=${out.confidence?.toFixed?.(2)} codes=${(ev.codes||[]).length} ocr_lines=${(ev.ocr||[]).length}`);
+    }
+
     res.json(out);
   } catch (e) {
     console.error(e);
@@ -59,6 +73,8 @@ app.post('/api/identify', upload.array('images', 6), async (req, res) => {
 
 const port = Number(process.env.PORT || 8787);
 app.listen(port, () => {
+  if (!process.env.OPENAI_API_KEY) {
+    console.warn('OPENAI_API_KEY not set; VLM disabled');
+  }
   console.log(`identify server on :${port}`);
 });
-

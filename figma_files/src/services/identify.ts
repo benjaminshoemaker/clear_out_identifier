@@ -51,14 +51,16 @@ type ApiIdentifyResult = {
 };
 
 const API_BASE = (import.meta as any).env?.VITE_API_URL || '/api';
+const VITE_PROVIDER = (import.meta as any).env?.VITE_PROVIDER || 'mock';
+const VITE_ENABLE_STAGES = (import.meta as any).env?.VITE_ENABLE_STAGES || 'barcode,ocr';
 
 async function callServer(files: File[]): Promise<IdentifyResponse | null> {
   try {
     const fd = new FormData();
     for (const f of files) fd.append('images', f);
     const qs = new URLSearchParams({
-      enableStages: 'barcode,ocr',
-      provider: 'mock',
+      enableStages: VITE_ENABLE_STAGES,
+      provider: VITE_PROVIDER,
       allowFilenameText: 'true',
       timeoutMs: '2000'
     });
